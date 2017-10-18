@@ -19,10 +19,10 @@ const emoting = {
       url: `${apiUrl}/questions?id=${questionId}`
     });
   },
-  rate(questionId, ratingValue) {
+  rate(questionId, ratingValue, comment) {
     return $.ajax({
       type: 'PUT',
-      url: `${apiUrl}/ratings?questionId=${questionId}&rating=${ratingValue}`
+      url: `${apiUrl}/ratings?questionId=${questionId}&rating=${ratingValue}&comment={comment}`
     });
   },
   stats(questionId, adminUuid) {

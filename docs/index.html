@@ -182,26 +182,26 @@
         <div class="column">
           <img class="rating" data-shake="shake-vertical" data-value="good" src="images/svg/good.svg" width="100%" />
           <textarea id="myRateComment" placeholder="Put a comment here to explain your rating, please!"></textarea>
-           <img class="submitting" data-shake="shake-vertical" data-value="verygood" src="images/png/submit_feedback_button.png" width="100%" />
+           <img class="submitting" data-shake="shake-vertical" data-value="good" src="images/png/submit_feedback_button.png" width="100%" />
 
         </div>
         <div class="column">
           <img class="rating" data-shake="shake-horizontal" data-value="bad" src="images/svg/bad.svg" width="100%" />
           <textarea id="myRateComment" placeholder="Put a comment here to explain your rating, please!"></textarea>
-           <img class="submitting" data-shake="shake-horizontal" data-value="verygood" src="images/png/submit_feedback_button.png" width="100%" />
+           <img class="submitting" data-shake="shake-horizontal" data-value="bad" src="images/png/submit_feedback_button.png" width="100%" />
 
         </div>
         <div class="column">
           <img class="rating" data-shake="shake-horizontal" data-value="verybad" src="images/svg/verybad.svg" width="100%" />
           <textarea id="myRateComment" placeholder="Put a comment here to explain your rating, please!"></textarea>
-          <img class="submitting" data-shake="shake-horizontal" data-value="verygood" src="images/png/submit_feedback_button.png" width="100%" />
+          <img class="submitting" data-shake="shake-horizontal" data-value="verybad" src="images/png/submit_feedback_button.png" width="100%" />
 
         </div>
       </div>
       <div>
-        <textarea type="text" id="myRateComment" name="myRateComment" class="myRateComment"
+        <textarea type="text" id="myRateCommentAll" name="myRateComment" class="myRateComment"
             placeholder="Put a comment here to explain your rating, please!"></textarea>
-             <button onclick="myFunction(document.getElementById("myRateComment").value, 
+             <button onclick="myFunction(document.getElementById("myRateCommentAll").val(), 
                                          document.getElementsByClassName("rating").data-value);">Send feedback!</button> 
       </div>
     </div>

@@ -43,6 +43,7 @@ function handleRating(event) {
   setTimeout(function() {
     rating.removeClass(`shake-constant ${shake}`);
   }, 500);
+  $('#polite').show();
 }
 
 function handleSubmitting(event) {

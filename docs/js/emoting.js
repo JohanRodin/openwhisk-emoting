@@ -22,7 +22,7 @@ const emoting = {
   rate(questionId, ratingValue, comment) {
     return $.ajax({
       type: 'PUT',
-      url: `${apiUrl}/ratings?questionId=${questionId}&rating=${ratingValue}&comment={comment}`
+      url: `${apiUrl}/ratings?questionId=${questionId}&rating=${ratingValue}&comment=${comment}`
     });
   },
   stats(questionId, adminUuid) {

@@ -14,6 +14,7 @@ function showQuestion(questionId) {
 
     $('#empty-layout-body').html(questionTemplate(context));
     $('.rating').on('click', handleRating);
+    $('.submitting').on('click', handleSubmitting);
 
     $('#section-loading').fadeOut().hide();
     $('#empty-layout').fadeIn().css('display', 'flex');
@@ -43,6 +44,26 @@ function handleRating(event) {
   }, 500);
 }
 
+function handleSubmitting(event) {
+  const submit = $(event.target);
+  const value = submit.attr('data-value');
+  const shake = submit.attr('data-shake');
+  const comment = submit.attr('myRateComment');
+  console.log('tap on', value);
+
+  submit.addClass(`shake-constant ${shake}`);
+
+  emoting.rate(currentQuestion.id, value, comment).done(function(result) {
+    console.log('[OK] Rated!', result);
+  }).error(function(error) {
+    console.log('[KO]', error);
+  });
+
+  // animate no matter what
+  setTimeout(function() {
+    submit.removeClass(`shake-constant ${shake}`);
+  }, 500);
+}
 function myFunction(mycomment, rating) {
   emoting.rate(currentQuestion.id, rating, mycomment).done(function(result) {
     console.log('[OK] Rated!', result);

@@ -28,7 +28,8 @@ function handleRating(event) {
   const rating = $(event.target);
   const value = rating.attr('data-value');
   const shake = rating.attr('data-shake');
-  const comment = rating.attr('myRateComment');
+  //const comment = rating.attr('myRateComment');
+  const comment = $('#myRateComment').val();     
   console.log('tap on', value);
 
   rating.addClass(`shake-constant ${shake}`);
@@ -50,7 +51,8 @@ function handleSubmitting(event) {
   const submit = $(event.target);
   const value = submit.attr('data-value');
   const shake = submit.attr('data-shake');
-  const comment = submit.attr('myRateComment');
+  //const comment = submit.attr('myRateComment');
+  const comment = $('#myRateComment').val();  
   console.log('tap on', value);
 
   submit.addClass(`shake-constant ${shake}`);

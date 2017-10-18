@@ -43,8 +43,8 @@ function handleRating(event) {
   }, 500);
 }
 
-function myFunction(mycomment) {
-  emoting.rate(currentQuestion.id, value, mycomment).done(function(result) {
+function myFunction(mycomment, rating) {
+  emoting.rate(currentQuestion.id, rating, mycomment).done(function(result) {
     console.log('[OK] Rated!', result);
   }).error(function(error) {
     console.log('[KO]', error);

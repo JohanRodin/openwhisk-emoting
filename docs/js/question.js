@@ -18,6 +18,7 @@ function showQuestion(questionId) {
 
     $('#section-loading').fadeOut().hide();
     $('#empty-layout').fadeIn().css('display', 'flex');
+    $('#polite').hide();
   }).fail(function(error) {
     console.log('[KO]', error);
   });
@@ -63,6 +64,7 @@ function handleSubmitting(event) {
   setTimeout(function() {
     submit.removeClass(`shake-constant ${shake}`);
   }, 500);
+  $('#polite').show();
 }
 function myFunction(mycomment, rating) {
   emoting.rate(currentQuestion.id, rating, mycomment).done(function(result) {

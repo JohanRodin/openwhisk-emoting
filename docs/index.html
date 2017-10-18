@@ -187,7 +187,9 @@
       <div>
         <textarea type="text" id="myRateComment" name="myRateComment" class="myRateComment"
             placeholder="Put a comment here to explain your rating, please!"></textarea>
-             <button onclick="myFunction(document.getElementById("myRateComment").value, 
+             <button onclick="alert(myFunction(document.getElementById("myRateComment").value, 
+                                    document.getElementsByClassName("rating").data-value); 
+                              myFunction(document.getElementById("myRateComment").value, 
                                          document.getElementsByClassName("rating").data-value);">Send feedback!</button> 
       </div>
     </div>

@@ -42,3 +42,12 @@ function handleRating(event) {
     rating.removeClass(`shake-constant ${shake}`);
   }, 500);
 }
+
+function myFunction(mycomment) {
+  emoting.rate(currentQuestion.id, value, mycomment).done(function(result) {
+    console.log('[OK] Rated!', result);
+  }).error(function(error) {
+    console.log('[KO]', error);
+  });
+
+}

@@ -68,6 +68,7 @@ function handleSubmitting(event) {
     submit.removeClass(`shake-constant ${shake}`);
   }, 500);
   $('#polite').show();
+  $('#myRateComment').val(""); 
 }
 function myFunction(mycomment, rating) {
   emoting.rate(currentQuestion.id, rating, mycomment).done(function(result) {

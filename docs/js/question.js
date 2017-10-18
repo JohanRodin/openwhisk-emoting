@@ -26,11 +26,12 @@ function handleRating(event) {
   const rating = $(event.target);
   const value = rating.attr('data-value');
   const shake = rating.attr('data-shake');
+  const comment = rating.attr('data-value');
   console.log('tap on', value);
 
   rating.addClass(`shake-constant ${shake}`);
 
-  emoting.rate(currentQuestion.id, value).done(function(result) {
+  emoting.rate(currentQuestion.id, value, comment).done(function(result) {
     console.log('[OK] Rated!', result);
   }).error(function(error) {
     console.log('[KO]', error);

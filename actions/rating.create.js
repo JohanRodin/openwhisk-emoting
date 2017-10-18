@@ -30,6 +30,11 @@ function main(args) {
     return { ok: false };
   }
 
+  if (!args.comment) {
+    console.log('[KO] No comment specified');
+    return { ok: false };
+  }
+
   return new Promise((resolve, reject) => {
     self.create(
       args['services.cloudant.url'],
@@ -37,6 +42,7 @@ function main(args) {
       args['services.cloudant.ratings'],
       args.questionId,
       args.rating,
+      args.comment,
       (error, result) => {
         if (error) {
           console.log('[KO]', error);
@@ -53,7 +59,7 @@ function main(args) {
 exports.main = global.main = main;
 
 function create(cloudantUrl, questionsDatabase, ratingsDatabase,
-  questionId, ratingValue, callback/* err,question */) {
+  questionId, ratingValue, comment, callback/* err,question */) {
   const cloudant = Cloudant({
     url: cloudantUrl,
     plugin: 'retry',
@@ -70,6 +76,7 @@ function create(cloudantUrl, questionsDatabase, ratingsDatabase,
         type: 'rating',
         question: questionId,
         value: ratingValue,
+        comment: comment,
         created_at: new Date()
       };
       ratingsDb.insert(rating, (rErr, rResult) => {

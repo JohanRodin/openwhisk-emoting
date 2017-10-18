@@ -26,7 +26,7 @@ function handleRating(event) {
   const rating = $(event.target);
   const value = rating.attr('data-value');
   const shake = rating.attr('data-shake');
-  const comment = "my comment";
+  const comment = rating.attr('myRateComment');
   console.log('tap on', value);
 
   rating.addClass(`shake-constant ${shake}`);

@@ -26,8 +26,8 @@ function showQuestion(questionId) {
 
 function handleRating(event) {
   const rating = $(event.target);
-  const value = rating.attr('data-value');
-  const shake = rating.attr('data-shake');
+  var value = rating.attr('data-value');
+  var shake = rating.attr('data-shake');
   //const comment = rating.attr('myRateComment');
   var comment = $('#myRateComment').val();     
   console.log('tap on', value);
@@ -49,8 +49,8 @@ function handleRating(event) {
 
 function handleSubmitting(event) {
   const submit = $(event.target);
-  const value = submit.attr('data-value');
-  const shake = submit.attr('data-shake');
+  var value = submit.attr('data-value');
+  var shake = submit.attr('data-shake');
   //const comment = submit.attr('myRateComment');
   var comment = $('#myRateComment').val();  
   console.log('tap on', value);

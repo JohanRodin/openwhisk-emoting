@@ -29,7 +29,7 @@ function handleRating(event) {
   var value = rating.attr('data-value');
   var shake = rating.attr('data-shake');
   //const comment = rating.attr('myRateComment');
-  var comment = $('#myRateComment').val();     
+  var comment = $('#myRateComment').val() || 'no comment';     
   console.log('tap on', value);
 
   rating.addClass(`shake-constant ${shake}`);
@@ -45,6 +45,7 @@ function handleRating(event) {
     rating.removeClass(`shake-constant ${shake}`);
   }, 500);
   $('#polite').show();
+  $('#myRateComment').val(""); 
 }
 
 function handleSubmitting(event) {
@@ -52,7 +53,7 @@ function handleSubmitting(event) {
   var value = submit.attr('data-value');
   var shake = submit.attr('data-shake');
   //const comment = submit.attr('myRateComment');
-  var comment = $('#myRateComment').val();  
+  var comment = $('#myRateComment').val()  || 'no comment';  
   console.log('tap on', value);
 
   submit.addClass(`shake-constant ${shake}`);

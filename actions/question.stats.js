@@ -108,14 +108,15 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
             if (rErr) {
               callback(rErr);
             } else {
-              rResult.rows.forEach((row) => {
-                if (row.comment !== 'no comment') {
-                  stats.comments[row.key[1]] = { comment: row.comment };
-                  stats.totalcomments += 1;    
-                };
-             });
+                rResult.rows.forEach((row) => {
+                  if (row.comment !== 'no comment' || '') {
+                    stats.comments[row.key[1]] = { comment: row.comment };
+                    stats.totalcomments += 1;    
+                  };
+                });
+               }
             });
-          stats.question = question;
+          
           callback(null, stats);
         }
       });

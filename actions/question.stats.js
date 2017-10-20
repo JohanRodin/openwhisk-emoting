@@ -91,6 +91,12 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
             totalcomments: 0,
             comments: {}
           };
+          //zero out to start with
+          stats.ratings['verygood'] = { value: 0 }; 
+          stats.ratings['good'] = { value: 0 }; 
+          stats.ratings['bad'] = { value: 0 }; 
+          stats.ratings['verybad'] = { value: 0 }; 
+          
           rResult.rows.forEach((row) => {
             stats.ratings[row.key[1]] = { value: row.value };
             stats.total += row.value;         
@@ -109,9 +115,11 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
             if (r2Err) {
               callback(r2Err);
             } else {
+              stats.comments['verygood'] = { comment: 'My comment1' };
               r2Result.rows.forEach((row) => {
                 //push to array and only those != 'no comments'
                 stats.comments[row.key[1]] = { comment: row.value };
+                stats.comments['verygood'] = { comment: 'My comment2' };
                 stats.totalcomments += 1;         
               });
             }

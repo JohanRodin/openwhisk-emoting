@@ -103,8 +103,8 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
           ratingsDb.view('ratings', 'all', {
             startkey: [questionId],
             endkey: [questionId, {}],
-            reduce: true,
-            group: true
+            reduce: false,
+            group: false
           }, (r2Err, r2Result) => {
             if (r2Err) {
               callback(r2Err);

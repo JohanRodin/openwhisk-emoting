@@ -111,11 +111,12 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
               callback(r2Err);
             } else {
                 r2Result.rows.forEach((row) => {
-                  if (row.comment != 'no comment') {
-                    stats.comments[row.key[1]] = { comment: row.comment };
+                  //if (row.comment != 'no comment') {
+                    stats.comments[row.key[1]] = { value: row.value };
                     stats.totalcomments += 1;    
-                  }
+                  //}
                 });
+               stats.question = question;
                callback(null, stats);
                }
             });

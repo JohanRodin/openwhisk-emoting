@@ -115,13 +115,14 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
               body.rows.forEach((row) => {
                 if (row.doc.comment) {
                   //templist = stats.comments[row.doc.value].comment || [];  
-                  //templist.push(row.doc.comment);
+                  templist.push(row.doc.comment);
                   //stats.comments[row.doc.value] = { comment: templist };
                   //stats.comments[row.doc.value] = { comment: row.doc.comment };
                   //commentlist.push(row.doc.comment);
-                  stats.totalcomments += 1;
+                  //stats.totalcomments += 1;
                 }
               });
+              commentlist.append(templist);
           });
           stats.comments['verygood'] = { comment: commentlist };
           stats.totalcomments += 1;

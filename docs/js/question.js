@@ -35,8 +35,8 @@ function handleRating(event) {
   case 'verygood': comment = $('#myRateComment1').val()  || 'no comment';  break;
   case 'good': comment = $('#myRateComment2').val()  || 'no comment';  break;
   case 'bad': comment = $('#myRateComment3').val()  || 'no comment';  break;
-  case 'verybad': comment = $('#myRateComment4').val()  || 'no comment';
-  esac;
+  case 'verybad': comment = $('#myRateComment4').val()  || 'no comment'; break;
+    default: 
   };
   //naive solution
   //var comment = $('#myRateComment').val()  || 'no comment'; 
@@ -72,8 +72,8 @@ function handleSubmitting(event) {
   case 'verygood': comment = $('#myRateComment1').val()  || 'no comment';  break;
   case 'good': comment = $('#myRateComment2').val()  || 'no comment';  break;
   case 'bad': comment = $('#myRateComment3').val()  || 'no comment';  break;
-  case 'verybad': comment = $('#myRateComment4').val()  || 'no comment';
-  esac;
+  case 'verybad': comment = $('#myRateComment4').val()  || 'no comment'; break;
+    default: 
   };
   //naive solution
   //var comment = $('#myRateComment').val()  || 'no comment';   

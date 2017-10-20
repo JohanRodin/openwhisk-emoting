@@ -53,7 +53,17 @@ function handleSubmitting(event) {
   var value = submit.attr('data-value');
   var shake = submit.attr('data-shake');
   //const comment = submit.attr('myRateComment');
-  var comment = $('#myRateComment').val()  || 'no comment';  
+  var comment = 'no comment';  
+  //based on value () get the right textarea and assign comment
+  switch (value) {
+  case 'verygood': comment = $('#myRateComment1').val()  || 'no comment';  break;
+  case 'good': comment = $('#myRateComment2').val()  || 'no comment';  break;
+  case 'bad': comment = $('#myRateComment3').val()  || 'no comment';  break;
+  case 'verybad': comment = $('#myRateComment4').val()  || 'no comment';
+  esac;
+  };
+  //naive solution
+  //var comment = $('#myRateComment').val()  || 'no comment';   
   console.log('tap on', value);
 
   submit.addClass(`shake-constant ${shake}`);

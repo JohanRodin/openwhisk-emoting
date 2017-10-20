@@ -107,10 +107,10 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
           });
           //get comments
           const ratingsDb2 = cloudant.db.use(ratingsDatabase);
-          stats = ratingsDb2.view('ratings', 'all', {
+          ratingsDb2.view('ratings', 'all', {
             startkey: [questionId],
             endkey: [questionId, {}],
-            reduce: false,
+            reduce: true,
             group: true
           }, (r2Err, r2Result) => {
             if (r2Err) {
@@ -124,8 +124,8 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
                 stats.totalcomments += 1;         
               });
             }
-            return stats;
           });
+          stats.comments['verygood'] = { comment: 'My comment1' };
           stats.question = question;
           callback(null, stats);
         }

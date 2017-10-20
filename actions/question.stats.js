@@ -106,11 +106,12 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
               Math.round((stats.ratings[rating].value * 100) / stats.total) : 0;
           });
           //get comments
-          ratingsDb.view('ratings', 'all', {
+          const ratingsDb2 = cloudant.db.use(ratingsDatabase);
+          ratingsDb2.view('ratings', 'all', {
             startkey: [questionId],
             endkey: [questionId, {}],
             reduce: false,
-            group: false
+            group: true
           }, (r2Err, r2Result) => {
             if (r2Err) {
               callback(r2Err);

@@ -120,6 +120,8 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
                   //commentlist.push(row.doc.comment);
                   stats.totalcomments += 1;
               });
+            } else {
+              stats.comments['verybad'] = { comment: commentlist };
             }
           });
           stats.comments['verygood'] = { comment: commentlist };

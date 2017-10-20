@@ -4,7 +4,7 @@
       "_id": "_design/ratings",
       "views": {
         "all": {
-          "map": "function (doc) {\n  emit([doc.question, doc.value, doc.comment], 1);\n}"
+          "map": "function (doc) {\n  emit([doc.question, doc.value], doc.comment);\n}"
         },
         "stats": {
           "map": "function (doc) {\n  emit([doc.question, doc.value], 1);\n}",

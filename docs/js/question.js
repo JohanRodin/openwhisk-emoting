@@ -29,7 +29,17 @@ function handleRating(event) {
   var value = rating.attr('data-value');
   var shake = rating.attr('data-shake');
   //const comment = rating.attr('myRateComment');
-  var comment = $('#myRateComment').val() || 'no comment';     
+  var comment = 'no comment';  
+  //based on value (verygood, good, etc) get the right textarea and assign comment
+  switch (value) {
+  case 'verygood': comment = $('#myRateComment1').val()  || 'no comment';  break;
+  case 'good': comment = $('#myRateComment2').val()  || 'no comment';  break;
+  case 'bad': comment = $('#myRateComment3').val()  || 'no comment';  break;
+  case 'verybad': comment = $('#myRateComment4').val()  || 'no comment';
+  esac;
+  };
+  //naive solution
+  //var comment = $('#myRateComment').val()  || 'no comment'; 
   console.log('tap on', value);
 
   rating.addClass(`shake-constant ${shake}`);
@@ -45,7 +55,10 @@ function handleRating(event) {
     rating.removeClass(`shake-constant ${shake}`);
   }, 500);
   $('#polite').show();
-  $('#myRateComment').val(""); 
+  $('#myRateComment1').val(""); 
+  $('#myRateComment2').val(""); 
+  $('#myRateComment3').val(""); 
+  $('#myRateComment4').val(""); 
 }
 
 function handleSubmitting(event) {
@@ -79,7 +92,10 @@ function handleSubmitting(event) {
     submit.removeClass(`shake-constant ${shake}`);
   }, 500);
   $('#polite').show();
-  $('#myRateComment').val(""); 
+  $('#myRateComment1').val(""); 
+  $('#myRateComment2').val(""); 
+  $('#myRateComment3').val(""); 
+  $('#myRateComment4').val(""); 
 }
 function myFunction(mycomment, rating) {
   emoting.rate(currentQuestion.id, rating, mycomment).done(function(result) {

@@ -107,7 +107,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
           });
           //get comments
           const ratingsDb2 = cloudant.db.use(ratingsDatabase);
-          ratingsDb2.view('ratings', 'all', {
+          stats = ratingsDb2.view('ratings', 'all', {
             startkey: [questionId],
             endkey: [questionId, {}],
             reduce: false,
@@ -124,6 +124,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
                 stats.totalcomments += 1;         
               });
             }
+            return stats;
           });
           stats.question = question;
           callback(null, stats);

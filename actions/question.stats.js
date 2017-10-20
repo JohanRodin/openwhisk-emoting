@@ -108,17 +108,22 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
           });
           //get comments
           const ratingsDb2 = cloudant.db.use(ratingsDatabase);
-          var commentlist = [];
+          //var commentlist = [];
           ratingsDb2.list({ include_docs: true }, (err, body) => {
             if (!err) {
+              var templist = [];
               body.rows.forEach((row) => {
-                if(row.doc.comment)
-                  commentlist.push(row.doc.comment);
+                //if(row.doc.comment)
+                  templist = stats.comments[row.doc.value].comment || [];  
+                  templist.push(row.doc.comment);
+                  stats.comments[row.doc.value] = { comment: templist };
+                  //commentlist.push(row.doc.comment);
                   stats.totalcomments += 1;
               });
             }
           });
           stats.comments['verygood'] = { comment: commentlist };
+          stats.totalcomments += 1;
           stats.question = question;
           callback(null, stats);
         }

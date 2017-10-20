@@ -89,7 +89,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
             total: 0,
             ratings: {},
             totalcomments: 0,
-            comments: {}
+            comments: {}   
           };
           rResult.rows.forEach((row) => {
             stats.ratings[row.key[1]] = { value: row.value };
@@ -98,7 +98,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
             if (row.comment == 'no comment') {
               
             } else {
-              stats.comments[row.key[1]] += { comment: row.comment };
+              stats.comments[row.key[1]] = { value: row.value, comment: row.comment };
               stats.totalcomments += 1;
             };
           });

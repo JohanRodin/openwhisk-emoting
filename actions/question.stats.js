@@ -123,11 +123,13 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
                 stats.comments['verygood'] = { comment: 'My comment2' };
                 stats.totalcomments += 1;         
               });
+              //stats.comments['verygood'] = { comment: 'My comment1' };
+              //stats.totalcomments += 1;
+          
+              stats.question = question;
+              callback(null, stats);
             }
-          });
-          stats.comments['verygood'] = { comment: 'My comment1' };
-          stats.question = question;
-          callback(null, stats);
+          });         
         }
       });
     }

@@ -104,17 +104,17 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
           ratingsDb.view('ratings', 'all', {
             startkey: [questionId],
             endkey: [questionId, {}],
-            reduce: true,
+            reduce: false,
             group: true
-          }, (rErr, rResult) => {
-            if (rErr) {
-              callback(rErr);
+          }, (r2Err, r2Result) => {
+            if (r2Err) {
+              callback(r2Err);
             } else {
-                rResult.rows.forEach((row) => {
+                r2Result.rows.forEach((row) => {
                   if (row.comment !== 'no comment') {
                     stats.comments[row.key[1]] = { comment: row.comment };
                     stats.totalcomments += 1;    
-                  };
+                  }
                 });
                }
             });

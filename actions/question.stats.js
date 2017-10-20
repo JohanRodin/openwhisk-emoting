@@ -103,13 +103,15 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
           
           ratingsDb.view('ratings', 'all', {
             startkey: [questionId],
-            endkey: [questionId, {}]
+            endkey: [questionId, {}],
+            reduce: true,
+            group: true
           }, (rErr, rResult) => {
             if (rErr) {
               callback(rErr);
             } else {
                 rResult.rows.forEach((row) => {
-                  if (row.comment !== 'no comment' || '') {
+                  if (row.comment !== 'no comment') {
                     stats.comments[row.key[1]] = { comment: row.comment };
                     stats.totalcomments += 1;    
                   };

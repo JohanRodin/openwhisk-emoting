@@ -104,7 +104,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
           ratingsDb.view('ratings', 'all', {
             startkey: [questionId],
             endkey: [questionId, {}],
-            reduce: false,
+            reduce: true,
             group: true
           }, (r2Err, r2Result) => {
             if (r2Err) {
@@ -112,12 +112,12 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
             } else {
                 r2Result.rows.forEach((row) => {
                   //if (row.comment != 'no comment') {
-                    stats.comments[row.key[1]] = { value: row.value };
+                    stats.comments[row.key[1]] = 'any';
                     stats.totalcomments += 1;    
                   //}
                 });
-               stats.question = question;
-               callback(null, stats);
+               
+               
                }
             });
           

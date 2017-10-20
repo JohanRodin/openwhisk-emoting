@@ -100,27 +100,6 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
               Math.round((stats.ratings[rating].value * 100) / stats.total) : 0;
           });
           stats.question = question;
-          
-          ratingsDb.view('ratings', 'all', {
-            startkey: [questionId],
-            endkey: [questionId, {}],
-            reduce: true,
-            group: true
-          }, (r2Err, r2Result) => {
-            if (r2Err) {
-              callback(r2Err);
-            } else {
-                r2Result.rows.forEach((row) => {
-                  //if (row.comment != 'no comment') {
-                    stats.comments[row.key[1]] = { comment: 'any' };
-                    stats.totalcomments += 1;    
-                  //}
-                });
-               
-               
-               }
-            });
-          
           callback(null, stats);
         }
       });

@@ -25,7 +25,7 @@ function showQuestion(questionId) {
 }
 
 function handleRating(event) {
-  const rating = $(event.target);
+  var rating = $(event.target);
   var value = rating.attr('data-value');
   var shake = rating.attr('data-shake');
   //const comment = rating.attr('myRateComment');
@@ -62,7 +62,7 @@ function handleRating(event) {
 }
 
 function handleSubmitting(event) {
-  const submit = $(event.target);
+  var submit = $(event.target);
   var value = submit.attr('data-value');
   var shake = submit.attr('data-shake');
   //const comment = submit.attr('myRateComment');

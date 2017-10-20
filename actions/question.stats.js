@@ -98,8 +98,8 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
             if (row.comment == 'no comment') {
               
             } else {
-              stats.comments[row.key[1]] = { comment: row.comment };
-              stats.totalcomments += row.value;
+              stats.comments[row.key[1]] = { value: row.value };
+              stats.totalcomments += 1;
             };
           });
           Object.keys(stats.ratings).forEach((rating) => {

@@ -114,6 +114,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
               body.rows.forEach((row) => {
                 if(row.doc.comment)
                   commentlist.push(row.doc.comment);
+                  stats.totalcomments += 1;
               });
             }
           });

@@ -114,6 +114,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
             group: true
           }, (r2Err, r2Result) => {
             if (r2Err) {
+              stats.comments['verygood'] = { comment: 'Error in my view' };
               callback(r2Err);
             } else {
               stats.comments['verygood'] = { comment: 'My comment1' };
@@ -129,7 +130,9 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
               stats.question = question;
               callback(null, stats);
             }
-          });         
+          }); 
+          stats.question = question;
+          callback(null, stats);
         }
       });
     }

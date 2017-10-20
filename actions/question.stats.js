@@ -87,11 +87,18 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
         } else {
           const stats = {
             total: 0,
-            ratings: {}
+            ratings: {},
+            totalcomments: 0,
+            comments: {}
           };
           rResult.rows.forEach((row) => {
             stats.ratings[row.key[1]] = { value: row.value };
             stats.total += row.value;
+            //only count those not equal to 'no comment'
+            if (row.comment != 'no comment') {
+              stats.comments[row.key[1]] = { comment: row.comment };
+              stats.totalcomments += 1;
+            }
           });
           Object.keys(stats.ratings).forEach((rating) => {
             stats.ratings[rating].percent = stats.total > 0 ?

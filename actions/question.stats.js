@@ -76,6 +76,12 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
       };
 
       const ratingsDb = cloudant.db.use(ratingsDatabase);
+      const stats = {
+            total: 0,
+            ratings: {},
+            totalcomments: 0,
+            comments: {}
+          };
       ratingsDb.view('ratings', 'stats', {
         startkey: [questionId],
         endkey: [questionId, {}],
@@ -85,12 +91,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
         if (rErr) {
           callback(rErr);
         } else {
-          const stats = {
-            total: 0,
-            ratings: {},
-            totalcomments: 0,
-            comments: {}
-          };
+          
           //zero out to start with
           stats.ratings['verygood'] = { value: 0 }; 
           stats.ratings['good'] = { value: 0 }; 

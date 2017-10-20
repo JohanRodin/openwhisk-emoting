@@ -116,6 +116,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
                     stats.totalcomments += 1;    
                   }
                 });
+               callback(null, stats);
                }
             });
           

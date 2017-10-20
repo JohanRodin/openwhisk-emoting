@@ -112,7 +112,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
             } else {
                 r2Result.rows.forEach((row) => {
                   //if (row.comment != 'no comment') {
-                    stats.comments[row.key[1]] = 'any';
+                    stats.comments[row.key[1]] = { comment: 'any' };
                     stats.totalcomments += 1;    
                   //}
                 });

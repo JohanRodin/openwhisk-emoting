@@ -76,12 +76,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
       };
 
       const ratingsDb = cloudant.db.use(ratingsDatabase);
-      const stats = {
-            total: 0,
-            ratings: {},
-            totalcomments: 0,
-            comments: {}
-          };
+      
       ratingsDb.view('ratings', 'stats', {
         startkey: [questionId],
         endkey: [questionId, {}],
@@ -91,7 +86,12 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
         if (rErr) {
           callback(rErr);
         } else {
-          
+          const stats = {
+            total: 0,
+            ratings: {},
+            totalcomments: 0,
+            comments: {}
+          };
           //zero out to start with
           stats.ratings['verygood'] = { value: 0 }; 
           stats.ratings['good'] = { value: 0 }; 
@@ -108,30 +108,16 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
           });
           //get comments
           const ratingsDb2 = cloudant.db.use(ratingsDatabase);
-          ratingsDb2.view('ratings', 'all', {
-            startkey: [questionId],
-            endkey: [questionId, {}],
-            reduce: true,
-            group: true
-          }, (r2Err, r2Result) => {
-            if (r2Err) {
-              stats.comments['verygood'] = { comment: 'Error in my view' };
-              callback(r2Err);
-            } else {
-              stats.comments['verygood'] = { comment: 'My comment1' };
-              r2Result.rows.forEach((row) => {
-                //push to array and only those != 'no comments'
-                stats.comments[row.key[1]] = { comment: row.value };
-                stats.comments['verygood'] = { comment: 'My comment2' };
-                stats.totalcomments += 1;         
+          var commentlist = [];
+          ratingsDb2.list({ include_docs: true }, (err, body) => {
+            if (!err) {
+              body.rows.forEach((row) => {
+                if(row.doc.comment)
+                  commentlist.push(row.doc.comment);
               });
-              //stats.comments['verygood'] = { comment: 'My comment1' };
-              //stats.totalcomments += 1;
-          
-              stats.question = question;
-              callback(null, stats);
             }
-          }); 
+          });
+          stats.comments['verygood'] = { comment: commentlist };
           stats.question = question;
           callback(null, stats);
         }

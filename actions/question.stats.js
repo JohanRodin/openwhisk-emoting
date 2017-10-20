@@ -110,7 +110,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
               callback(r2Err);
             } else {
               r2Result.rows.forEach((row) => {
-                stats.comments[row.key[1]] = { comment: 'any' };
+                stats.comments[row.key[1]] = { comment: "any" };
                 stats.totalcomments += 1;         
               });
             }

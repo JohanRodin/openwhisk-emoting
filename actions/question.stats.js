@@ -109,21 +109,28 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
           //get comments
           const ratingsDb2 = cloudant.db.use(ratingsDatabase);
           var commentlist = [ 'My test comment' ];
-          ratingsDb2.list({ include_docs: true }, (err, body) => {
-            if (!err) {
-              var templist = [];
-              body.rows.forEach((row) => {
-                if (row.doc.comment) {
-                  //templist = stats.comments[row.doc.value].comment || [];  
-                  //templist.push(row.doc.comment);
-                  //stats.comments[row.doc.value] = { comment: templist };
-                  //stats.comments[row.doc.value] = { comment: row.doc.comment };
-                  //commentlist.push(row.doc.comment);
-                  //stats.totalcomments += 1;
-                }
-              });
-              commentlist.append(templist);
-          });
+          ratingsDb2.view('ratings', 'details', {
+            startkey: [questionId],
+            endkey: [questionId, {}],
+            reduce: true,
+            group: true
+          }, (r2Err, r2Result) => {
+                if (r2Err) {
+                  callback(r2Err);
+                } else {
+                  var templist = [];
+                  r2Result.rows.forEach((row) => {
+                    stats.comments[row.key[1]] = { comment: row.value };
+                    stats.totalcomments += 1;     
+                    //templist = stats.comments[row.doc.value].comment || [];  
+                    //templist.push(row.doc.comment);
+                    //stats.comments[row.doc.value] = { comment: templist };
+                    //stats.comments[row.doc.value] = { comment: row.doc.comment };
+                    //commentlist.push(row.doc.comment);
+                    //stats.totalcomments += 1;                 
+                  }); //foreach
+                } //else
+          }); //view
           stats.comments['verygood'] = { comment: commentlist };
           stats.totalcomments += 1;
           stats.question = question;

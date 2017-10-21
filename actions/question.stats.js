@@ -76,40 +76,49 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
       };
 
       const ratingsDb = cloudant.db.use(ratingsDatabase);
-      
-      ratingsDb.view('ratings', 'details', {
-        startkey: [questionId],
-        endkey: [questionId, {}],
-        reduce: true,
-        group: true
-      }, (rErr, rResult) => {
-        if (rErr) {
-          callback(rErr);
-        } else {
+      var comments_vg = [];
+      var comments_g = [];
+      var comments_b = [];
+      var comments_vb = [];
+      ratingsDb.list({ include_docs: true }, function(err, body) {
+        if (!err) {
           const stats = {
             total: 0,
             ratings: {},
             totalcomments: 0,
             comments: {}
           };
+          body.rows.forEach((row) => {
+            if (row.doc.type == 'rating') 
+              if (row.doc.question == questionId) {
+                switch(row.doc.value) {
+                  case 'verygood': comments_vg.push(row.doc.comment);
+                  case 'good': comments_g.push(row.doc.comment);
+                  case 'bad': comments_b.push(row.doc.comment);
+                  case 'verybad': comments_vb.push(row.doc.comment);
+                    default:
+                } //case
+              } //if questionid
+          }); //foreach
+          stats.comments[''] = { comment: comments_vg };
+          
+      
+        }//if
+  }); //list
+         
           //zero out to start with
           stats.ratings['verygood'] = { value: 0 }; 
           stats.ratings['good'] = { value: 0 }; 
           stats.ratings['bad'] = { value: 0 }; 
           stats.ratings['verybad'] = { value: 0 }; 
-          rResult.rows.forEach((row) => {
-            stats.comments[row.key[1]] = { comment: row.value };
-            stats.totalcomments += 1;               
-          }); //foreach
-          stats.comments['verybad'] = { comment: "Hej" };
+          
        
           stats.question = question;
           callback(null, stats);
          
-        
-      });
-    }
-  });
+    }//else
+      }); //get
+   
 }
 
 exports.get = get;

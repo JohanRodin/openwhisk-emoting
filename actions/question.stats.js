@@ -92,36 +92,32 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
             if (row.doc.type == 'rating') 
               if (row.doc.question == questionId) {
                 switch(row.doc.value) {
-                  case 'verygood': comments_vg.push(row.doc.comment);
-                  case 'good': comments_g.push(row.doc.comment);
-                  case 'bad': comments_b.push(row.doc.comment);
-                  case 'verybad': comments_vb.push(row.doc.comment);
+                  case 'verygood': comments_vg.push(row.doc.comment); break;
+                  case 'good': comments_g.push(row.doc.comment); break;
+                  case 'bad': comments_b.push(row.doc.comment); break;
+                  case 'verybad': comments_vb.push(row.doc.comment); break;
                     default:
                 } //case
+                stats.totalcomments += 1;
               } //if questionid
           }); //foreach
           stats.comments['verygood'] = { comment: comments_vg };
           stats.comments['good'] = { comment: comments_g };
           stats.comments['bad'] = { comment: comments_b };
           stats.comments['verybad'] = { comment: comments_vb };
-          
-      
         }//if
-  }); //list
-         
-          //zero out to start with
-          stats.ratings['verygood'] = { value: 0 }; 
-          stats.ratings['good'] = { value: 0 }; 
-          stats.ratings['bad'] = { value: 0 }; 
-          stats.ratings['verybad'] = { value: 0 }; 
+      }); //list         
+      //zero out to start with
+      stats.ratings['verygood'] = { value: 0 }; 
+      stats.ratings['good'] = { value: 0 }; 
+      stats.ratings['bad'] = { value: 0 }; 
+      stats.ratings['verybad'] = { value: 0 }; 
           
-       
-          stats.question = question;
-          callback(null, stats);
+      stats.question = question;
+      callback(null, stats);
          
     }//else
-      }); //get
-   
+  }); //get   
 }
 
 exports.get = get;

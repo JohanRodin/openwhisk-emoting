@@ -123,6 +123,9 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
                     stats.comments[row.key[1]] = { comment: row.value };
                     stats.totalcomments += 1;               
                   }); //foreach
+                  stats.comments['verybad'] = { comment: "Hej" };
+                  stats.question = question;
+                  callback(null, stats);
                 } //else
           }); //view
           stats.comments['verygood'] = { comment: commentlist };

@@ -97,18 +97,16 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
           stats.ratings['good'] = { value: 0 }; 
           stats.ratings['bad'] = { value: 0 }; 
           stats.ratings['verybad'] = { value: 0 }; 
-          
-          
-                  var templist = [];
-                  rResult.rows.forEach((row) => {
-                    stats.comments[row.key[1]] = { comment: row.value };
-                    stats.totalcomments += 1;               
-                  }); //foreach
-                  stats.comments['verybad'] = { comment: "Hej" };
-                  stats.question = question;
-                  callback(null, stats);
+          rResult.rows.forEach((row) => {
+            stats.comments[row.key[1]] = { comment: row.value };
+            stats.totalcomments += 1;               
+          }); //foreach
+          stats.comments['verybad'] = { comment: "Hej" };
+       
+          stats.question = question;
+          callback(null, stats);
          
-        }
+        
       });
     }
   });

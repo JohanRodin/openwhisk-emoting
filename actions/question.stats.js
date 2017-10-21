@@ -116,8 +116,29 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
           stats.ratings['bad'] = { value: 0 }; 
           stats.ratings['verybad'] = { value: 0 }; 
           
-          stats.question = question;
-          callback(null, stats);
+          //get stats
+          const ratingsDb2 = cloudant.db.use(ratingsDatabase);     
+          ratingsDb2.view('ratings', 'stats', {
+            startkey: [questionId],
+            endkey: [questionId, {}],
+            reduce: true,
+            group: true
+          }, (rErr, rResult, stats) => {
+              if (rErr) {
+              callback(rErr);
+             } else {            
+                rResult.rows.forEach((row) => {
+                  stats.ratings[row.key[1]] = { value: row.value };
+                  stats.total += row.value;         
+                });
+                Object.keys(stats.ratings).forEach((rating) => {
+                  stats.ratings[rating].percent = stats.total > 0 ?
+                  Math.round((stats.ratings[rating].value * 100) / stats.total) : 0;
+                });
+                stats.question = question;
+                callback(null, stats);
+             }//else
+          });//view 
         }//if
       }); //list          
     }//else

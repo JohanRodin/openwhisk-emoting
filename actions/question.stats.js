@@ -81,7 +81,9 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
       var comments_b = [];
       var comments_vb = [];
       ratingsDb.list({ include_docs: true }, function(err, body) {
-        if (!err) {
+        if (err) {
+          callback(err);
+        } else {
           const stats = {
             total: 0,
             ratings: {},

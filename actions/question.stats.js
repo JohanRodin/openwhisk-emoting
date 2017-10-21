@@ -81,7 +81,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
       var comments_b = [];
       var comments_vb = [];
       
-      const stats = {
+      var stats = {
             total: 0,
             ratings: {},
             totalcomments: 0,

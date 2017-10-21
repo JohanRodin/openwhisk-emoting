@@ -11,7 +11,7 @@
           "reduce": "_sum"
         },
         "details": {
-          "map": "function (doc) {\n  if (doc.type == \"rating\") {\n if (doc.comment != \"no comment\") {\n emit([doc.question, doc.value], doc.comment);\n}\n}"
+          "map": "function (doc) {\n  if (doc.type == \"rating\") {\n if (doc.comment != \"no comment\") {\n emit([doc.question, doc.value], doc.comment);\n}\n}\n}"
         }
       },
       "language": "javascript"

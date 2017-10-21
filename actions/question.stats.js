@@ -100,7 +100,10 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
                 } //case
               } //if questionid
           }); //foreach
-          stats.comments[''] = { comment: comments_vg };
+          stats.comments['verygood'] = { comment: comments_vg };
+          stats.comments['good'] = { comment: comments_g };
+          stats.comments['bad'] = { comment: comments_b };
+          stats.comments['verybad'] = { comment: comments_vb };
           
       
         }//if

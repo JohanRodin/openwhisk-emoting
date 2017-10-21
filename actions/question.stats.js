@@ -123,7 +123,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
             endkey: [questionId, {}],
             reduce: true,
             group: true
-          }, self.createCallback(stats, question));
+          }, createCallback(stats, question));
                           
            //(rErr, rResult) => {
            //   if (rErr) {
@@ -146,6 +146,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
     }//else
   }); //get   
 }
+exports.get = get;
 
 function createCallback(stats, question) {
   return function(rErr, rResult) {
@@ -165,4 +166,4 @@ function createCallback(stats, question) {
     }//else
   };
 }
-exports.get = get;
+exports.createCallback = createCallback;

@@ -86,7 +86,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
         if (rErr) {
           callback(rErr);
         } else {
-          const stats = {
+          var stats = {
             total: 0,
             ratings: {},
             totalcomments: 0,
@@ -107,9 +107,9 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
               Math.round((stats.ratings[rating].value * 100) / stats.total) : 0;
           });
           //get comments
-          const ratingsDb2 = cloudant.db.use(ratingsDatabase);
+          //const ratingsDb2 = cloudant.db.use(ratingsDatabase);
           var commentlist = [ 'My test comment' ];
-          ratingsDb2.view('ratings', 'details', {
+          ratingsDb.view('ratings', 'details', {
             startkey: [questionId],
             endkey: [questionId, {}],
             reduce: true,
@@ -121,13 +121,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
                   var templist = [];
                   r2Result.rows.forEach((row) => {
                     stats.comments[row.key[1]] = { comment: row.value };
-                    stats.totalcomments += 1;     
-                    //templist = stats.comments[row.doc.value].comment || [];  
-                    //templist.push(row.doc.comment);
-                    //stats.comments[row.doc.value] = { comment: templist };
-                    //stats.comments[row.doc.value] = { comment: row.doc.comment };
-                    //commentlist.push(row.doc.comment);
-                    //stats.totalcomments += 1;                 
+                    stats.totalcomments += 1;               
                   }); //foreach
                 } //else
           }); //view

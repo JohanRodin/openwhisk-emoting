@@ -86,7 +86,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
         if (rErr) {
           callback(rErr);
         } else {
-          var stats = {
+          const stats = {
             total: 0,
             ratings: {},
             totalcomments: 0,

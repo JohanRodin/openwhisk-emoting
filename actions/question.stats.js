@@ -93,8 +93,8 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
             comments: {}
           };
           body.rows.forEach((row) => {
-            if (row.doc.type == "rating") 
-              if (row.doc.question == questionId) {
+            if (row.doc.type == "rating" && row.doc.question == questionId) 
+              if (row.doc.comment != "no comment") {
                 switch(row.doc.value) {
                   case 'verygood': comments_vg.push(row.doc.comment); break;
                   case 'good': comments_g.push(row.doc.comment); break;
@@ -103,7 +103,7 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
                     default:
                 } //case
                 stats.totalcomments += 1;
-              } //if questionid
+              } //if comment
           }); //foreach
           stats.comments['verygood'] = { comment: comments_vg };
           stats.comments['good'] = { comment: comments_g };

@@ -9,6 +9,9 @@
         "stats": {
           "map": "function (doc) {\n  emit([doc.question, doc.value], 1);\n}",
           "reduce": "_sum"
+        },
+        "details": {
+          "map": "function (doc) {\n  emit([doc.question, doc.value], doc.comment);\n}"
         }
       },
       "language": "javascript"

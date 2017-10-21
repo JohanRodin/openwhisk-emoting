@@ -81,19 +81,19 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
       var comments_b = [];
       var comments_vb = [];
       
-      var stats = {
+      
+      ratingsDb.list({ include_docs: true }, function(err, body) {
+        if (err) {
+          callback(err);
+        } else {
+          const stats = {
             total: 0,
             ratings: {},
             totalcomments: 0,
             comments: {}
           };
-      ratingsDb.list({ include_docs: true }, function(err, body) {
-        if (err) {
-          callback(err);
-        } else {
-          
           body.rows.forEach((row) => {
-            if (row.doc.type == 'rating') 
+            if (row.doc.type == "rating") 
               if (row.doc.question == questionId) {
                 switch(row.doc.value) {
                   case 'verygood': comments_vg.push(row.doc.comment); break;
@@ -109,17 +109,17 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
           stats.comments['good'] = { comment: comments_g };
           stats.comments['bad'] = { comment: comments_b };
           stats.comments['verybad'] = { comment: comments_vb };
-        }//if
-      }); //list         
-      //zero out to start with
-      stats.ratings['verygood'] = { value: 0 }; 
-      stats.ratings['good'] = { value: 0 }; 
-      stats.ratings['bad'] = { value: 0 }; 
-      stats.ratings['verybad'] = { value: 0 }; 
           
-      stats.question = question;
-      callback(null, stats);
-         
+          //zero out to start with
+          stats.ratings['verygood'] = { value: 0 }; 
+          stats.ratings['good'] = { value: 0 }; 
+          stats.ratings['bad'] = { value: 0 }; 
+          stats.ratings['verybad'] = { value: 0 }; 
+          
+          stats.question = question;
+          callback(null, stats);
+        }//if
+      }); //list          
     }//else
   }); //get   
 }

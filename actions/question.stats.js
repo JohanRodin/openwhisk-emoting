@@ -80,16 +80,18 @@ function get(cloudantUrl, questionsDatabase, ratingsDatabase,
       var comments_g = [];
       var comments_b = [];
       var comments_vb = [];
-      ratingsDb.list({ include_docs: true }, function(err, body) {
-        if (err) {
-          callback(err);
-        } else {
-          const stats = {
+      
+      const stats = {
             total: 0,
             ratings: {},
             totalcomments: 0,
             comments: {}
           };
+      ratingsDb.list({ include_docs: true }, function(err, body) {
+        if (err) {
+          callback(err);
+        } else {
+          
           body.rows.forEach((row) => {
             if (row.doc.type == 'rating') 
               if (row.doc.question == questionId) {

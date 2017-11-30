@@ -6,9 +6,16 @@ You are giving this presentation and as attendees leave the room you'd like to g
 
    [![emoting](xdocs/emoting-youtube.png)](https://youtu.be/5btqydWZ8u0 "emoting")
 
-## Adjustments made by me
+## Adjustments made by Johan Rodin to the original app made by fred
 
 To be able to capture not only feedback emotions I added a comment field to each emoticon and a display of those comments on the admin page.
+
+The end user gets this view:<br>
+<img src="xdocs/Screen Shot 2017-11-30 at 13.25.27.png" height="200"/><br>
+And after sending the feedback:<br>
+<img src="xdocs/Screen Shot 2017-11-30 at 13.26.20.png" height="200"/><br>
+The admin user gets this view:<br>
+<img src="xdocs/Screen Shot 2017-11-30 at 13.26.45.png" height="200"/><br>
 
 ## Overview
 
